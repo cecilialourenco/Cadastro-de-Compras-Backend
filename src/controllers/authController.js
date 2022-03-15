@@ -8,7 +8,8 @@ router.post('/product', async(req, res) => {
   const { nome } = req.body;
 
   try {
-
+    if (!nome)
+      return res.status(400).send({  error: 'Dados faltando' });
     if (await Produto.findOne({ nome }))
       return res.status(400).send({  error: 'Produto já cadastrado' });
 
